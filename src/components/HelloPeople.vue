@@ -2,7 +2,7 @@
   <v-container class="text-center my-4">
     <v-row class="justify-center pa-9">
       <v-img alt="Fulltech Logo" class="shrink mr-2" contain src="../assets/logo.png" max-height="50" max-width="50" />
-      <h1>Sejá bem vindo ao Desafio Full Tech Pro</h1>
+      <h1>Desafio Front-End</h1>
     </v-row>
     <v-row class="justify-center">
       <v-col sm="8">
@@ -26,6 +26,11 @@
         <code>
          this.$api.Servico.GetAll()
         </code>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        Para ver todos os metodos disponiveis entre na pasta: <b>src/plugins/_api</b>
       </v-col>
     </v-row>
 
