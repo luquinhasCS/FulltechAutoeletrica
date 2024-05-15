@@ -9,6 +9,12 @@ const routes = [
     name: 'home',
     component: () => import('../views/HomeView.vue'),
   },
+  {
+    path: '/main',
+    name: 'main',
+    component: () => import('../views/MainView.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = new VueRouter({

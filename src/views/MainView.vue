@@ -1,13 +1,13 @@
 <template>
-  <HomeScreen />
+  <MainScreen />
 </template>
 
 <script>
-import HomeScreen from '../components/HomeScreen'
+import MainScreen from '../components/MainScreen'
 
 export default {
   components: {
-    HomeScreen,
+    MainScreen,
   },
 }
 </script>
