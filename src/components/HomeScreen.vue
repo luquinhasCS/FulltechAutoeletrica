@@ -23,56 +23,8 @@
               </v-alert>
           </v-col>
           <v-col class="d-flex justify-space-between">
-            <v-btn color="success" @click="openModal">Cadastrar</v-btn>
-            <v-dialog v-model="showDialog" transition="dialog-bottom-transition" width="400">
-              <template>
-                <v-card class="text-center pa-6">
-                  <v-alert v-if="erro" type="error" outlined>
-                    {{ erro }}
-                  </v-alert>
-                  <v-col class="text-h6">
-                    Cadastro de cliente
-                    <v-icon class="ml-5" color="black" medium @click="closeModal">mdi-close-circle-outline</v-icon>
-                  </v-col>
-                  <v-col>
-                    <v-text-field v-model="User.nome" required class="mb-2" label="Nome" outlined color="grey"></v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                      v-mask="'###.###.###-##'"
-                      placeholder="000.000.000-00"
-                      v-model="User.cpf_cadastro"
-                      class="mb-2"
-                      label="CPF"
-                      outlined
-                      required
-                      color="grey"></v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                        v-model="User.email"
-                        class="mb-2"
-                        label="E-mail"
-                        required
-                        outlined
-                        color="grey"></v-text-field>
-                  </v-col>
-                  <v-col>
-                    <v-text-field
-                        v-model="User.telefone"
-                        class="mb-2"
-                        v-mask="'(##)#####-####'"
-                        label="Telefone"
-                        required
-                        outlined 
-                        color="grey"></v-text-field>
-                  </v-col>
-                  <v-card-actions class="justify-center w-100">
-                    <v-btn large type="submit" color="success" width="90%" @click="addUser">Cadastrar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </template>
-            </v-dialog>
+            <v-btn color="success"  @click.stop="showDialog=true">Cadastrar</v-btn>
+            <RegisterScreen v-model="showDialog"/>
             <v-btn color="success" type="submit">Entrar</v-btn>
           </v-col>
         </v-col>
@@ -84,64 +36,25 @@
 <script setup>
   import { shallowRef } from 'vue'
   import { mapGetters } from 'vuex'
+  import RegisterScreen from './RegisterScreen.vue'
 
   const dialog = shallowRef(false)
-
 </script>
 
 <script>
 export default {
+  components: {
+    RegisterScreen,
+  },
   data() {
     return {
-      showDialog: false,
       cpf_login: '',
-      User: {
-          nome: '',
-          cpf_cadastro: '',
-          email: '',
-          telefone: '',
-          admin: false,
-        },
       erro: '',
+      showDialog: false,
     }
   },
 
   methods: {
-    openModal() {
-      this.showDialog = true
-    },
-    closeModal() {
-      this.showDialog = false
-    },
-    async addUser() {
-      this.erro = false
-      if (this.User.nome === ''){
-        this.erro = 'Insira um nome!'
-        return
-      }
-      if (this.User.cpf_cadastro === ''){
-        this.erro = 'Insira um CPF!'
-        return
-      }
-      if (this.User.email === ''){
-        this.erro = 'Insira um email!'
-        return
-      }
-      if (this.User.telefone === ''){
-        this.erro = 'Insira um telefone!'
-        return
-      }
-
-      const novoUsuario = await this.$store.dispatch(
-        'user/addUser',
-        this.User
-      )
-      if(novoUsuario) {
-        this.erro = await novoUsuario
-        return
-      }
-      this.showDialog = false
-    },
     async login() {
         if (this.cpf_login !== '') {
           this.erro = ''
@@ -162,17 +75,6 @@ export default {
       getUser: 'user/getUser',
     }),
   },
-  watch: {
-    showDialog: function(val) {
-      if(val) {
-        this.erro = false
-        this.User.nome = ''
-        this.User.cpf_cadastro = ''
-        this.User.telefone = ''
-        this.User.email = ''
-      }
-    }
-  }
 }
 </script>
 <style scoped>
