@@ -3,11 +3,11 @@
     <v-col class="d-flex justify-center align-center" style="gap: 50px">
       <v-col class="flex-grow-0">
         <v-btn elevation="2" class="btn-main pa-5 px-9" outlined @click="dialog = true">SOLICITAR SERVIÇO</v-btn>
-        <v-dialog v-model="dialog" transition="dialog-bottom-transition" width="800">
+        <v-dialog v-model="dialog" transition="dialog-top-transition" width="800">
           <v-card class="pa-2">
             <v-col class="d-flex justify-space-between">
               <v-col class="text-h6 pa-0">Novo Atendimento</v-col>
-              <v-icon class="ml-5" color="black" medium @click="dialog.value = false">mdi-close</v-icon>
+              <v-icon class="ml-5" color="black" medium @click="dialog = false">mdi-close</v-icon>
             </v-col>
             <v-card>
               <v-col class="d-flex justify-space-between align-center grey lighten-3 pa-0">
@@ -38,7 +38,7 @@
                   <v-col class="d-flex text-center">
                     <v-card-text class="text-h6 pa-0" style="width: inherit">Ordem de serviço</v-card-text>
                     <v-spacer></v-spacer>
-                    <v-icon class="ml-5" color="black" medium @click="dialog.value = false">mdi-close</v-icon>
+                    <v-icon class="ml-5" color="black" medium @click="dialog2 = false">mdi-close</v-icon>
                   </v-col>
                   <v-card class="mb-3">
                     <v-col class="d-flex justify-space-between align-center grey lighten-3 pa-0">
@@ -92,7 +92,7 @@
         </v-dialog>
       </v-col>
       <v-col class="flex-grow-0">
-        <v-btn  elevation="2" class="btn-main pa-5  px-9" outlined>LISTA DE SERVIÇOS</v-btn>
+        <v-btn  elevation="2" class="btn-main pa-5  px-9" outlined to="/services">LISTA DE SERVIÇOS</v-btn>
       </v-col>
     </v-col>
   </v-container>
@@ -100,6 +100,7 @@
 
 <script setup>
   import { shallowRef } from 'vue'
+  import { mapGetters } from 'vuex'
 
   const dialog = shallowRef(false)
   const dialog2 = shallowRef(false)
@@ -114,6 +115,17 @@
         dialog2: false
       }
     },
+    methods: {
+      logout() {
+        this.$store.dispatch('auth/logout')
+        this.$router.push('/login')
+      },
+    },
+    computed: {
+      ...mapGetters({
+        getUser: 'user/getUser',
+      }),
+    },
   }
 </script>
 <style scoped>
@@ -127,7 +139,7 @@
   align-items: center;
   background-image: url(../assets/background.png);
   background-size: cover;
-  height: 100vh;
+  height: calc(100vh - 64px) 
 }
 
 .btn-main {

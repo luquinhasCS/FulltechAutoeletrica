@@ -12,5 +12,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
+    'vue/valid-v-slot': ['error', {
+      allowModifiers: true
+    }],
   },
 }

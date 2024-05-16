@@ -1,5 +1,7 @@
 <template>
-  <HomeScreen />
+  <div>
+    <HomeScreen />
+  </div>
 </template>
 
 <script>

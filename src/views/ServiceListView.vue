@@ -1,17 +1,17 @@
 <template>
   <div>
-    <ScreenToolbar/>
-  <MainScreen />
-</div>
+    <ScreenToolbar />
+    <ServiceList />
+  </div>
 </template>
 
 <script>
-import MainScreen from '../components/MainScreen'
+import ServiceList from '../components/ServiceListScreen'
 import ScreenToolbar from '../components/ScreenToolbar'
 
 export default {
   components: {
-    MainScreen,
+    ServiceList,
     ScreenToolbar
   },
 }

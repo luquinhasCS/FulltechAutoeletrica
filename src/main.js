@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueMask from './plugins/mask'
 import router from './plugins/router'
 import store from './plugins/store'
 import vuetify from './plugins/vuetify'
@@ -10,6 +11,7 @@ Vue.prototype.$api = api
 Vue.config.productionTip = false
 
 new Vue({
+  VueMask,
   router,
   store,
   vuetify,
