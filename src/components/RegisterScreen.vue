@@ -104,6 +104,11 @@ export default {
                 return this.value
             },
             set (value) {
+                this.User.nome = ''
+                this.User.cpf_cadastro = ''
+                this.User.email = ''
+                this.User.telefone = ''
+                this.erro - '',
                 this.$emit('input', value)
             },
         }

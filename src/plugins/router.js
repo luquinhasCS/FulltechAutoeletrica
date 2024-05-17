@@ -32,7 +32,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isUserLogged = store.getters['auth/isLoggedIn']
-
   if (to.matched.some((record) => record.meta.requiresAuth) && !isUserLogged) {
     next({ name: 'home' })
   } else if (to.name === '/' && isUserLogged) {

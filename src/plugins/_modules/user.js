@@ -32,6 +32,19 @@ const actions = {
     } catch (error) {
       return error
     }
+  },
+  async CheckIfUserExists({ commit }, cpf) {
+    try {
+       const usuario = await api.Usuario.GetByCpf(cpf)
+
+      if(usuario){
+        return usuario
+      }
+      return false
+      
+    } catch (error) {
+      return error
+    }
   }
 }
 
